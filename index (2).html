@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools Box — Find the right AI tool, fast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1C1B1A;
+    --panel: #232220;
+    --card: #F5F0E6;
+    --orange: #FF6B35;
+    --brass: #B8975A;
+    --sage: #7A8B7F;
+    --text-light: #F5F0E6;
+    --text-dark: #2A2825;
+    --text-muted: #9A9690;
+    --border: #38362F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(28,27,26,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo span {
+    color: var(--orange);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .nav-links a:hover { color: var(--text-light); }
+
+  /* Hero */
+  .hero {
+    padding: 80px 0 56px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+
+  h1 .accent { color: var(--orange); }
+
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 540px;
+    margin: 0 auto 40px;
+  }
+
+  /* Search drawer */
+  .drawer {
+    max-width: 620px;
+    margin: 0 auto;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+
+  .drawer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brass);
+    background: rgba(184,151,90,0.12);
+    border: 1px solid rgba(184,151,90,0.3);
+    border-radius: 6px;
+    padding: 10px 12px;
+    white-space: nowrap;
+  }
+
+  .drawer input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 4px;
+  }
+
+  .drawer input::placeholder { color: var(--text-muted); }
+
+  .drawer button {
+    background: var(--orange);
+    color: #1C1B1A;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .drawer button:hover { background: #ff8159; }
+
+  /* Category drawers */
+  .compartments {
+    padding: 56px 0 16px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .grid-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 64px;
+  }
+
+  .compartment {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 16px;
+    background: var(--panel);
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .compartment::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--sage);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.2s ease;
+  }
+
+  .compartment:hover {
+    border-color: var(--brass);
+    transform: translateY(-2px);
+    background: #28261f;
+  }
+
+  .compartment:hover::before {
+    transform: scaleY(1);
+    background: var(--orange);
+  }
+
+  .compartment .icon {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .compartment .name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .compartment .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  /* Tool cards */
+  .grid-tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 70px;
+  }
+
+  .tool-card {
+    background: var(--card);
+    color: var(--text-dark);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid transparent;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(0,0,0,0.3);
+  }
+
+  .tool-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .tool-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .tool-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    background: rgba(122,139,127,0.12);
+    border: 1px solid rgba(122,139,127,0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .tool-card.featured .tool-tag {
+    color: var(--orange);
+    background: rgba(255,107,53,0.1);
+    border-color: rgba(255,107,53,0.3);
+  }
+
+  .tool-desc {
+    font-size: 0.88rem;
+    color: #5a5650;
+    flex-grow: 1;
+  }
+
+  .tool-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-top: 1px solid #e0dace;
+    padding-top: 12px;
+  }
+
+  .tool-link span {
+    transition: transform 0.15s ease;
+  }
+
+  .tool-card:hover .tool-link span {
+    transform: translateX(3px);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  footer .accent { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .drawer { flex-direction: column; align-items: stretch; }
+    .drawer-label { text-align: center; }
+    .drawer button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">AI Tools <span>Box</span></div>
+    <div class="nav-links">
+      <a href="#categories">Categories</a>
+      <a href="#tools">Tools</a>
+      <a href="#">Submit a Tool</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">// curated AI directory</div>
+    <h1>Every AI tool,<br>organized in <span class="accent">one box.</span></h1>
+    <p class="hero-sub">Stop digging through endless lists. Find the right AI tool for writing, design, coding, or business — sorted, tagged, and ready to use.</p>
+
+    <div class="drawer">
+      <div class="drawer-label">Search drawer</div>
+      <input type="text" placeholder="Try 'image generator' or 'email writer'...">
+      <button>Search</button>
+    </div>
+  </div>
+</section>
+
+<section class="compartments wrap" id="categories">
+  <div class="section-head">
+    <div class="section-title">Compartments</div>
+    <div class="section-tag">06 categories</div>
+  </div>
+  <div class="grid-categories">
+    <div class="compartment">
+      <span class="icon">✍️</span>
+      <div class="name">Writing</div>
+      <div class="count">3 tools</div>
+    </div>
+    <div class="compartment">
+      <span class="icon">🎨</span>
+      <div class="name">Image</div>
+      <div class="count">2 tools</div>
+    </div>
+    <div class="compartment">
+      <span class="icon">🎬</span>
+      <div class="name">Video</div>
+      <div class="count">2 tools</div>
+    </div>
+    <div class="compartment">
+      <span class="icon">💻</span>
+      <div class="name">Code</div>
+      <div class="count">2 tools</div>
+    </div>
+    <div class="compartment">
+      <span class="icon">🎧</span>
+      <div class="name">Audio</div>
+      <div class="count">2 tools</div>
+    </div>
+    <div class="compartment">
+      <span class="icon">📊</span>
+      <div class="name">Productivity</div>
+      <div class="count">2 tools</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="tools">
+  <div class="section-head">
+    <div class="section-title">Featured tools</div>
+    <div class="section-tag">13 tools</div>
+  </div>
+  <div class="grid-tools">
+
+    <div class="tool-card featured">
+      <div class="tool-top">
+        <div class="tool-icon">✉️</div>
+        <div class="tool-name">AI Email Writer</div>
+      </div>
+      <span class="tool-tag">Featured · Writing</span>
+      <p class="tool-desc">Generate professional emails in seconds. Supports English and Urdu (RTL), perfect for business and casual messages alike.</p>
+      <a href="#" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">💬</div>
+        <div class="tool-name">ChatGPT</div>
+      </div>
+      <span class="tool-tag">Writing</span>
+      <p class="tool-desc">A versatile AI assistant for writing, brainstorming, research, and problem-solving across almost any task.</p>
+      <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">📝</div>
+        <div class="tool-name">Notion AI</div>
+      </div>
+      <span class="tool-tag">Writing</span>
+      <p class="tool-desc">Write, summarize, and organize notes and docs directly inside your Notion workspace.</p>
+      <a href="https://www.notion.so/product/ai" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🖼️</div>
+        <div class="tool-name">Midjourney</div>
+      </div>
+      <span class="tool-tag">Image</span>
+      <p class="tool-desc">Create stunning, high-quality AI-generated artwork and images from simple text prompts.</p>
+      <a href="https://www.midjourney.com" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🎨</div>
+        <div class="tool-name">Adobe Firefly</div>
+      </div>
+      <span class="tool-tag">Image</span>
+      <p class="tool-desc">Generate and edit images, effects, and designs with Adobe's creative AI suite.</p>
+      <a href="https://firefly.adobe.com" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🎬</div>
+        <div class="tool-name">Synthesia</div>
+      </div>
+      <span class="tool-tag">Video</span>
+      <p class="tool-desc">Turn text scripts into professional AI avatar videos in multiple languages, no camera needed.</p>
+      <a href="https://www.synthesia.io" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🎞️</div>
+        <div class="tool-name">Runway</div>
+      </div>
+      <span class="tool-tag">Video</span>
+      <p class="tool-desc">Generate and edit video with AI, including text-to-video and advanced editing tools.</p>
+      <a href="https://runwayml.com" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">💻</div>
+        <div class="tool-name">GitHub Copilot</div>
+      </div>
+      <span class="tool-tag">Code</span>
+      <p class="tool-desc">An AI pair programmer that suggests code and entire functions right inside your editor.</p>
+      <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">⌨️</div>
+        <div class="tool-name">Cursor</div>
+      </div>
+      <span class="tool-tag">Code</span>
+      <p class="tool-desc">An AI-first code editor that helps you write, understand, and refactor code faster.</p>
+      <a href="https://www.cursor.com" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🎙️</div>
+        <div class="tool-name">ElevenLabs</div>
+      </div>
+      <span class="tool-tag">Audio</span>
+      <p class="tool-desc">Generate realistic AI voiceovers and text-to-speech in dozens of languages and voices.</p>
+      <a href="https://elevenlabs.io" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🔊</div>
+        <div class="tool-name">Murf AI</div>
+      </div>
+      <span class="tool-tag">Audio</span>
+      <p class="tool-desc">Create natural-sounding voiceovers for videos, presentations, and podcasts.</p>
+      <a href="https://murf.ai" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">🔎</div>
+        <div class="tool-name">Perplexity</div>
+      </div>
+      <span class="tool-tag">Productivity</span>
+      <p class="tool-desc">An AI search engine that gives fact-checked answers with cited sources in real time.</p>
+      <a href="https://www.perplexity.ai" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-top">
+        <div class="tool-icon">⚡</div>
+        <div class="tool-name">Zapier</div>
+      </div>
+      <span class="tool-tag">Productivity</span>
+      <p class="tool-desc">Connect your apps and automate workflows with AI-powered triggers and actions.</p>
+      <a href="https://zapier.com" target="_blank" rel="noopener" class="tool-link">Open tool <span>→</span></a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">AI Tools <span class="accent">Box</span> — built tool by tool.</div>
+</footer>
+
+</body>
+</html>
