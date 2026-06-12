@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Copilot Guide: AI Coding Assistant Explained — AI Tools Box</title>
+<meta name="description" content="Learn what GitHub Copilot is, how it helps developers write code faster, and how to start using it in your editor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1C1B1A;
+    --panel: #232220;
+    --card: #F5F0E6;
+    --orange: #FF6B35;
+    --brass: #B8975A;
+    --sage: #7A8B7F;
+    --text-light: #F5F0E6;
+    --text-dark: #2A2825;
+    --text-muted: #9A9690;
+    --border: #38362F;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--orange); text-decoration: none; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+  }
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--orange); }
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: inline-block;
+    margin-top: 8px;
+  }
+  .back-link:hover { color: var(--orange); }
+
+  article { padding: 56px 0; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 36px 0 14px;
+    color: var(--card);
+  }
+
+  p {
+    font-size: 1rem;
+    color: #c9c5bd;
+    margin-bottom: 18px;
+  }
+
+  ul {
+    margin: 0 0 18px 22px;
+    color: #c9c5bd;
+  }
+
+  li { margin-bottom: 8px; }
+
+  .cta-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--orange);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 36px 0;
+  }
+
+  .cta-box p { margin-bottom: 0; color: var(--text-light); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  footer .accent { color: var(--orange); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">AI Tools <span>Box</span></div>
+    <a href="../index.html" class="back-link">← Back to directory</a>
+  </div>
+</header>
+
+<article class="wrap">
+  <div class="eyebrow">// Code &amp; Development</div>
+  <h1>GitHub Copilot Guide: AI Coding Assistant Explained</h1>
+  <div class="meta">A beginner-friendly guide · 5 min read</div>
+
+  <p>GitHub Copilot is an AI tool that works inside your code editor and suggests code as you type. It can complete lines, write entire functions, explain code, and even help debug errors — acting like a pair programmer that's always available.</p>
+
+  <p>It's used by developers of all experience levels, from students learning to code to professional engineers working on large projects, to speed up everyday programming tasks.</p>
+
+  <h2>What can it help with?</h2>
+  <ul>
+    <li>Auto-completing lines and blocks of code as you type</li>
+    <li>Writing boilerplate code, such as functions, classes, and tests</li>
+    <li>Explaining what a piece of code does in plain language</li>
+    <li>Suggesting fixes for bugs and errors</li>
+    <li>Converting code from one programming language to another</li>
+    <li>Generating code comments and documentation</li>
+  </ul>
+
+  <h2>How to get started</h2>
+  <ul>
+    <li>Install the GitHub Copilot extension in your code editor (it supports popular editors like VS Code)</li>
+    <li>Sign in with your GitHub account and activate a Copilot subscription</li>
+    <li>Start typing code as usual — suggestions will appear automatically as gray text</li>
+    <li>Press tab (or the suggested key) to accept a suggestion, or keep typing to ignore it</li>
+  </ul>
+
+  <h2>Tips for getting better suggestions</h2>
+  <ul>
+    <li>Write clear function names and comments — Copilot uses them as context for its suggestions</li>
+    <li>Break tasks into smaller functions for more accurate completions</li>
+    <li>Review every suggestion before accepting it — Copilot is helpful, but not always correct</li>
+    <li>Use Copilot Chat to ask questions about your code or get explanations of unfamiliar code</li>
+  </ul>
+
+  <h2>Who is it for?</h2>
+  <p>GitHub Copilot is useful for beginners learning to code, since it can explain unfamiliar syntax and patterns. It's equally valuable for experienced developers who want to reduce repetitive typing and speed up routine coding tasks.</p>
+
+  <div class="cta-box">
+    <p>Want to try an AI coding assistant? GitHub Copilot is listed in our Code category, along with other AI tools built for developers.</p>
+  </div>
+
+  <h2>Final thoughts</h2>
+  <p>GitHub Copilot doesn't replace a developer's judgment, but it can significantly speed up writing and understanding code. For anyone who codes regularly, it's worth trying as part of your daily workflow.</p>
+</article>
+
+<footer>
+  <div class="wrap">AI Tools <span class="accent">Box</span> — built tool by tool.</div>
+</footer>
+
+</body>
+</html>
